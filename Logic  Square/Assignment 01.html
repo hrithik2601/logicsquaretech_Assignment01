@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clifornia's Cafe Directory</title>
+</head>
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    div.search {
+        background-color: blue;
+        padding: 5px;
+        height: 400px;
+        
+    }
+    h1{
+      text-align: center;
+      color: white;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 50px;
+    }
+
+   div.result {
+        display: "flex";
+    } 
+
+    input {
+        padding: 8px;
+        width: 60%;
+        height: 25px;
+        border-radius: 20px;
+        font-size: 30px;
+        text-align: center;
+        margin-left: 20%;
+    }
+    #button:hover{
+      cursor: pointer;
+    }
+    #button{
+      width: 10%;
+      height: 45px;
+      border-radius: 20px;
+      background-color: antiquewhite;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: large;
+    }
+    #cafe_name{
+       margin-top: 40px;
+       text-align: center;  
+    }
+    #div{
+      text-align: center;
+      font-size: 25px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin: 0 auto;
+      width: 50%;
+    }
+    #div div{
+    margin: 20px;
+    border: 2px solid black;
+   }
+    
+</style>
+
+<body>
+    <script>
+      function findCaliforniaCafe() {
+        const cafe = [
+          { "name": "Bazaar Cafe", "place_id": "kjk234g4gcvfx8usg1l33pi" },
+          { "name": "Ashley's Cafe", "place_id": "12hydbdf76sljfts87sbfis" },
+          { "name": "Avenue Cafe", "place_id": "skjd86svvfdrsv55svbvf3f" },
+          { "name": "Hi-Lo Cafe", "place_id": "mjdhgetr4pojfyts22fzfsh"  },
+          { "name": "California Chicken Cafe", "place_id": "saswe3s6yydtdr52hsd72yst" },
+          { "name": "Avenue Bakery Cafe", "place_id": "jahgde7wgdiau8ewsahgosd" },
+          { "name": "Philz Coffee", "place_id": "urhw3837ehalod7w02b7835" } 
+        ];
+        const place = [
+          {
+            "id": "kjk234g4gcvfx8usg1l33pi",
+            "street_no": "45250",
+            "locality": "Worth Avenue, Unit A",
+            "postal_code": "20619",
+            "lat": "36.1152",
+            "long": "117.521"
+          },
+          {
+            "id": "12hydbdf76sljfts87sbfis",
+            "street_no": "1B",
+            "locality": "Macarthur Blvd",
+            "postal_code": "20619",
+            "lat": "38.1781 N",
+            "long": "118.4171 W"
+          },
+          {
+            "id": "skjd86svvfdrsv55svbvf3f",
+            "street_no": "7S",
+            "locality": "Three Notch Road",
+            "postal_code": "20619",
+            "lat": "36.83",
+            "long": "119.6"
+          },
+          {
+            "id": "mjdhgetr4pojfyts22fzfsh",
+            "street_no": "22803",
+            "locality": "Gunston Dr Lexington Park",
+            "postal_code": "20688",
+            "lat": "35.7788",
+            "long": "119.979"
+          },
+          {
+            "id": "saswe3s6yydtdr52hsd72yst",
+            "street_no": "1X",
+            "locality": "Macarthur Blvd",
+            "postal_code": "20687",
+            "lat": "36.7783",
+            "long": "119.4179"
+          },
+          {
+            "id": "jahgde7wgdiau8ewsahgosd",
+            "street_no": "60H",
+            "locality": "Solomos Island Road",
+            "postal_code": "20688",
+            "lat": "36.7783 N",
+            "long": "119.4179 W"
+          },
+          {
+            "id": "urhw3837ehalod7w02b7835",
+            "street_no": "225",
+            "locality": "Macarthur Blvd",
+            "postal_code": "20687",
+            "lat": "35.77813",
+            "long": "119.41791"
+          }
+
+        ];
+
+        var cafeName = document.getElementById("cafe_name").value.toLowerCase();
+           cafe.filter((california_cafe)=>{
+            let name=california_cafe.name.slice(0,2).toLowerCase()
+            let entername=cafeName.slice(0,2);
+            if(name == entername){
+              place.filter(california_place=>{
+                  if(california_place.id==california_cafe.place_id){
+                    display(california_cafe,california_place)
+                  }
+              })
+            }       
+           })
+      }
+
+
+      function display(name,address){
+      let div=document.createElement("div");
+      let displaytag=document.getElementById("div")
+      let result=`
+        <p>name : ${name.name}</p>
+        <p>street_no : ${address.street_no}</p>
+        <p>locality : ${address.locality}</p>
+        <p>postal_code : ${address.postal_code}</p>
+        <p>lat : ${address.lat}</p>
+        <p>long : ${address.long}</p>
+      ` 
+      div.innerHTML=result;
+      displaytag.appendChild(div);
+
+
+      }
+    </script>
+    <div class="search">
+        <h1>California Cafe Directory</h1>
+        <input type="text" id="cafe_name" placeholder="Search your favorite cafes!" />
+        <button type="button" id="button" onclick= "findCaliforniaCafe()">Click Here</button>
+    </div>
+
+    <div class="result"></div>
+    <div id="div"></div>
+
+</body>
+
+</html>
